@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>T2_084 - Program Pencetak Angka Khusus</title>
+  <title>T3_084 - Min, Max, Rata-rata</title>
   <style>
     body {
         display: flex;
@@ -11,41 +11,53 @@
         flex-direction: column;
         font-family: Arial, sans-serif;
         padding: 20px;
-        margin: 0 200px;
+        margin-top: 200px;
     }
     #output {
-        padding: 15px;
-        background: #ffc2da;
-        margin-top: 20px;
+        margin-top: 15px;
+        padding: 10px;
+        background: #f0f8ff;
         border-radius: 8px;
-        white-space: pre-wrap;
     }
   </style>
 </head>
 <body>
-  <h2>Program Pencetak Angka 1-100 dengan Aturan Khusus</h2>
+  <h2>Menghitung Nilai Minimum, Maksimum, dan Rata-rata</h2>
 
-  <button onclick="cetakAngka()">Cetak Angka</button>
-    <div id="output"></div>
-  
+  <label for="inputArray">Masukkan array angka (pisahkan dengan koma):</label><br>
+  <input type="text" id="inputArray" placeholder="Contoh: 10,20,30,40,50" size="40">
+  <br><br>
+  <button onclick="hitung()">Hitung</button>
+
+  <div id="output"></div>
 
   <script>
-    function cetakAngka() {
-      let hasil = "";
-      for (let i = 1; i <= 100; i++) {
-        if (i % 15 === 0) {
-          hasil += "MI2A";
-        } else if (i % 3 === 0) {
-          hasil += "MI";
-        } else if (i % 5 === 0) {
-          hasil += "2A";
-        } else {
-          hasil += i;
-        }
-        // kasih koma dan spasi kecuali di angka terakhir
-        if (i < 100) hasil += ", ";
+    // Fungsi untuk menghitung min, max, dan rata-rata
+    function hitungStatistik(arr) {
+      const min = Math.min(...arr);
+      const max = Math.max(...arr);
+      const avg = arr.reduce((a, b) => a + b, 0) / arr.length;
+
+      return { min, max, avg };
+    }
+
+    function hitung() {
+      // Ambil input dan ubah menjadi array angka
+      const input = document.getElementById("inputArray").value;
+      const arr = input.split(",").map(Number).filter(n => !isNaN(n));
+
+      if (arr.length === 0) {
+        document.getElementById("output").innerHTML = "⚠ Masukkan array angka yang valid!";
+        return;
       }
-      document.getElementById("output").textContent = hasil;
+
+      const hasil = hitungStatistik(arr);
+
+      document.getElementById("output").innerHTML = `
+        <p>Nilai Minimum: <b>${hasil.min}</b></p>
+        <p>Nilai Maksimum: <b>${hasil.max}</b></p>
+        <p>Nilai Rata-rata: <b>${hasil.avg.toFixed(2)}</b></p>
+      `;
     }
   </script>
 </body>
