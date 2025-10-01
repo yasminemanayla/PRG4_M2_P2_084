@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>T2_084 - Program Pencetak Angka Khusus</title>
+  <style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        margin: 0 200px;
+    }
+    #output {
+        padding: 15px;
+        background: #ffc2da;
+        margin-top: 20px;
+        border-radius: 8px;
+        white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h2>Program Pencetak Angka 1-100 dengan Aturan Khusus</h2>
+
+  <button onclick="cetakAngka()">Cetak Angka</button>
+    <div id="output"></div>
+  
+
+  <script>
+    function cetakAngka() {
+      let hasil = "";
+      for (let i = 1; i <= 100; i++) {
+        if (i % 15 === 0) {
+          hasil += "MI2A";
+        } else if (i % 3 === 0) {
+          hasil += "MI";
+        } else if (i % 5 === 0) {
+          hasil += "2A";
+        } else {
+          hasil += i;
+        }
+        // kasih koma dan spasi kecuali di angka terakhir
+        if (i < 100) hasil += ", ";
+      }
+      document.getElementById("output").textContent = hasil;
+    }
+  </script>
+</body>
+</html>
